@@ -22,7 +22,7 @@ jobs:
       - name: Build and push Docker image
         run: |
           IMAGE_TAG=${GITHUB_SHA::7}
-          docker build -t atharva25s/backend-car-app:$IMAGE_TAG .
+          docker build -f backend-car-app/Dockerfile -t atharva25s/backend-car-app:$IMAGE_TAG backend-car-app          
           docker push atharva25s/backend-car-app:$IMAGE_TAG
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
 
