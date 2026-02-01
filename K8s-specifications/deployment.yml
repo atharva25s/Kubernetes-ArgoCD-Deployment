@@ -4,7 +4,7 @@ metadata:
   name: backend-car-app
   namespace: default
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: backend-car-app

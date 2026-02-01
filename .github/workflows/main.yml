@@ -1,0 +1,39 @@
+name: Build and Deploy Backend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        run: |
+          IMAGE_TAG=${GITHUB_SHA::7}
+          docker build -t atharva25s/backend-car-app:$IMAGE_TAG .
+          docker push atharva25s/backend-car-app:$IMAGE_TAG
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+
+      - name: Update Kubernetes deployment image
+        run: |
+          sed -i "s|image: atharva25s/backend-car-app:.*|image: atharva25s/backend-car-app:${IMAGE_TAG}|" K8s-specifications/deployment.yml
+
+      - name: Commit and push deployment update
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add K8s-specifications/deployment.yml
+          git commit -m "Deploy backend image ${IMAGE_TAG}"
+          git push
