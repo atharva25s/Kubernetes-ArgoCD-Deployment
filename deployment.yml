@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-car-app
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend-car-app
+  template:
+    metadata:
+      labels:
+        app: backend-car-app
+    spec:
+      containers:
+        - name: backend-car-app
+          image: atharva25s/backend-car-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080   # change if your app uses a different port
