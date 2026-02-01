@@ -1,5 +1,9 @@
 name: Build and Deploy Backend
 
+permissions:
+  contents: write
+
+
 on:
   push:
     branches:
@@ -9,6 +13,8 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    if: "!contains(github.event.head_commit.message, 'Deploy backend image')"
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
