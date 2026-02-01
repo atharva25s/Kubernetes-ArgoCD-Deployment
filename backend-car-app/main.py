@@ -68,6 +68,13 @@ def unstable_api():
     logger.info("GET /unstable - Request successful")
     return {"message": "Request succeeded"}
 
+@app.get("/testing")
+def testing_api():
+    val = 10
+    logger.info("GET /testing - Service is running")
+    return {"message": "Request succeeded", "value" : val}
+
+
 @app.get("/getCarDetailsByName/{car_name}")
 def get_car_details(car_name: str):
     car_name = car_name.lower()
