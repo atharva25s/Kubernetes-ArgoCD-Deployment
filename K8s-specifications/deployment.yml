@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: backend-car-app
-          image: atharva25s/backend-car-app:b16c353
+          image: atharva25s/backend-car-app:4c33f56
           imagePullPolicy: Always
           ports:
             - containerPort: 8000   # change if your app uses a different port
