@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: backend-car-app
-          image: atharva25s/backend-car-app:latest
+          image: atharva25s/backend-car-app:1c12a28
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
         - name: frontend-car-app
-          image: atharva25s/frontend-car-app:latest
+          image: atharva25s/frontend-car-app:1c12a28
           imagePullPolicy: Always
           ports:
             - containerPort: 5173
