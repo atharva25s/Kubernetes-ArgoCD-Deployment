@@ -1,13 +1,29 @@
+# ------------ BACKEND SERVICE (Internal) ------------
 apiVersion: v1
 kind: Service
 metadata:
   name: backend-car-app-service
-  namespace: default
 spec:
   selector:
     app: backend-car-app
   ports:
     - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: ClusterIP
+
+---
+
+# ------------ FRONTEND SERVICE (Public) ------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-car-app-service
+spec:
+  selector:
+    app: frontend-car-app
+  ports:
+    - protocol: TCP
       port: 80
-      targetPort: 8000   
+      targetPort: 5173
   type: NodePort
