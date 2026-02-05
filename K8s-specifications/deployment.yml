@@ -15,7 +15,32 @@ spec:
     spec:
       containers:
         - name: backend-car-app
-          image: atharva25s/backend-car-app:7f1f287
+          image: atharva25s/backend-car-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+
+---
+
+# ---------------- FRONTEND DEPLOYMENT ----------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-car-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend-car-app
+  template:
+    metadata:
+      labels:
+        app: frontend-car-app
+    spec:
+      containers:
+        - name: frontend-car-app
+          image: atharva25s/frontend-car-app:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5173
+

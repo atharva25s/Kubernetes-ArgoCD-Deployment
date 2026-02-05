@@ -113,7 +113,6 @@ jobs:
 
           git add K8s-specifications/deployment.yml
 
-          git diff --cached --quiet || \
-          git commit -m "Deploy image ${{ needs.setup.outputs.image_tag }}"
+          git commit -m "Deploy image with tag ${{ needs.setup.outputs.image_tag }}" && \
 
           git push
