@@ -106,18 +106,52 @@ kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath="{.data.pas
 ```
 ---
 
+## Nginx Ingress Setup for Kubernetes
+- Install Ingress-Nginx
+```bash
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+```
+- Verify
+``` bash
+kubectl get pods -n ingress-nginx -o wide
+```
+- `NOTE : To make Nginx Ingress Availble to the browser we need to take it to Control-plane Node as only Control-Plane has extra port mapping`
+- Label the Control Plane Node: *The Ingress manifest for KinD looks for a specific label to decide where to land.*
+```bash
+kubectl label node test-cluster-control-plane ingress-ready=true
+```
+- Patch the Ingress Deployment: *You need to ensure the NGINX deployment has a `nodeSelector` for the control plane and is using `hostPort`.*
+```bash
+kubectl patch deployment ingress-nginx-controller -n ingress-nginx --type=json -p='[{"op": "add", "path": "/spec/template/spec/nodeSelector", "value": {"kubernetes.io/hostname": "test-cluster-control-plane"}}]'
+```
+- For watching logs Ingress
+```bash
+kubectl logs -n ingress-nginx -l app.kubernetes.io/component=controller
+```
 
-- Temporary command
+---
+
+
+#### For Debugging
+
+- Temporary port-forwading backend service
 ```bash 
 sudo kubectl port-forward svc/backend-car-app-service 8000:80 --address 0.0.0.0 &
-
-kubectl logs -n ingress-nginx -l app.kubernetes.io/component=controller
-
-kubectl get pods -n ingress-nginx -o wide
-
+```
+- Temporary port-forwading frontend service
+```bash 
+sudo kubectl port-forward svc/frontend-car-app-service 80:80 --address 0.0.0.0 &
+```
+- Kubernetes pods and workers 
+```bash
+kubectl get pods -o wide -n ingress-nginx
+kubectl get pods -o wide -n argocd
 kubectl get pods -o wide
+```
 
-kubectl label node test-cluster-control-plane ingress-ready=true
-
-kubectl patch deployment ingress-nginx-controller -n ingress-nginx --type=json -p='[{"op": "add", "path": "/spec/template/spec/nodeSelector", "value": {"kubernetes.io/hostname": "test-cluster-control-plane"}}]'
+- Kubernetes Services
+```bash
+kubectl get svc
+kubectl get svc -n argocd
+kubectl get svc -n ingress-nginx
 ```
