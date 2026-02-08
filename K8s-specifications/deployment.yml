@@ -42,5 +42,5 @@ spec:
           image: atharva25s/frontend-car-app:63244af
           imagePullPolicy: Always
           ports:
-            - containerPort: 5173
+            - containerPort: 80
 
