@@ -38,7 +38,7 @@ export const api = {
   // New: fetch car details by name (external endpoint)
   async getCarDetailsByName(name) {
     const encoded = encodeURIComponent(name);
-    const response = await fetch(`http://98.130.85.46:8000/getCarDetailsByName/${encoded}`);
+    const response = await fetch(`${API_BASE_URL}/getCarDetailsByName/${encoded}`);
     if (!response.ok) {
       throw new Error('Failed to fetch car details');
     }
