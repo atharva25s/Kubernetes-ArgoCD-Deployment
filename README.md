@@ -110,4 +110,14 @@ kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath="{.data.pas
 - Temporary command
 ```bash 
 sudo kubectl port-forward svc/backend-car-app-service 8000:80 --address 0.0.0.0 &
+
+kubectl logs -n ingress-nginx -l app.kubernetes.io/component=controller
+
+kubectl get pods -n ingress-nginx -o wide
+
+kubectl get pods -o wide
+
+kubectl label node test-cluster-control-plane ingress-ready=true
+
+kubectl patch deployment ingress-nginx-controller -n ingress-nginx --type=json -p='[{"op": "add", "path": "/spec/template/spec/nodeSelector", "value": {"kubernetes.io/hostname": "test-cluster-control-plane"}}]'
 ```
