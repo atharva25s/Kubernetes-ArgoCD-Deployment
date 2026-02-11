@@ -12,7 +12,7 @@ spec:
   - http:
       paths:
         # Backend Routing
-        - path: /api/
+        - path: /api/(.*)
           pathType: Prefix
           backend:
             service:

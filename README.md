@@ -29,7 +29,7 @@ cd k8s-kind
 ```
 
 ### 1. Install KinD
-- Copy and execute [install_kind.sh](KinD-cluster\install_kind.sh)
+- Copy and execute [install_kind.sh](KinD-cluster/install_kind.sh)
 ```bash
 vim install_kind.sh
 ```
@@ -45,7 +45,7 @@ kind --version
 ```
 
 ### 2. Create KinD Cluster
-- Copy [config.yml](KinD-cluster\config.yml)
+- Copy [config.yml](KinD-cluster/config.yml)
 ```bash
 vim config.yml
 ```
@@ -55,7 +55,7 @@ kind create cluster --config=config.yml --name=test-cluster
 ```
 
 ### 3. Install kubectl
-- Copy and execute [install_kubectl.sh](KinD-cluster\install_kubectl.sh)
+- Copy and execute [install_kubectl.sh](KinD-cluster/install_kubectl.sh)
 ```bash
 vim install_kubectl.sh
 ```

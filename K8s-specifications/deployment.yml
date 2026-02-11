@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: backend-car-app
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: backend-car-app
