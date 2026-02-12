@@ -28,7 +28,7 @@ function Home() {
             <div className="speed-indicator">{time.getSeconds()}</div>
             <div className="speed-label">API Monitor</div>
           </div>
-          <h1 className="hero-title">Yash Hello</h1>
+          <h1 className="hero-title">CarTech Dashboard</h1>
           <p className="hero-subtitle">Advanced API Performance & Monitoring System</p>
           <div className="time-display">{time.toLocaleTimeString()}</div>
         </div>
