@@ -14,7 +14,7 @@ function Navigation() {
 
   return (
     <nav className="main-nav">
-      <Link to="/" className="nav-logo">CarTech Dashboard</Link>
+      <Link to="/" className="nav-logo">HIIII CHIMNIIII</Link>
       <div className="nav-links">
         <Link to="/status" className={location.pathname === '/status' ? 'active' : ''}>Status</Link>
         <Link to="/process" className={location.pathname === '/process' ? 'active' : ''}>Process</Link>
