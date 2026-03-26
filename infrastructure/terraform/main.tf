@@ -1,20 +1,20 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 6.0"
-    }
+# terraform {
+#   required_providers {
+#     aws = {
+#       source  = "hashicorp/aws"
+#       version = "~> 6.0"
+#     }
     
-     local = {
-      source  = "hashicorp/local"
-      version = "~> 2.0"
-    }
-  }
-}
+#      local = {
+#       source  = "hashicorp/local"
+#       version = "~> 2.0"
+#     }
+#   }
+# }
 
-provider "aws" {
-  region     = "ap-south-1"
-}
+# provider "aws" {
+#   region     = "ap-south-1"
+# }
 
 # EC2 INSTANCE
 resource "aws_instance" "web_server" {
@@ -45,10 +45,10 @@ output "ec2_private_ip" {
 }
 
 resource "local_file" "ansible_inventory" {
-  filename = "/home/yash/projects/ansible4/inventory.ini"
+  filename = "/home/ubuntu/ansible/inventory.ini"
 
   content = <<EOT
 [ec2]
-${aws_instance.web_server.public_ip} ansible_user=ubuntu ansible_ssh_private_key_file=/home/yash/Downloads/keys/argocd-key.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+${aws_instance.web_server.public_ip} ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/configs/test-key.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 EOT
 }
