@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+      
+    paths:
+      - 'backend-car-app/**'
+      - 'frontend-car-app/**'
+      - 'K8s-specifications/**'
+      - 'KinD-cluster/**'
 
 permissions:
   contents: write
