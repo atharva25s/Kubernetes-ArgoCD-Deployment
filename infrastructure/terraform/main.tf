@@ -4,6 +4,11 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 6.0"
     }
+    
+     local = {
+      source  = "hashicorp/local"
+      version = "~> 2.0"
+    }
   }
 }
 
@@ -37,4 +42,13 @@ output "ec2_public_ip" {
 
 output "ec2_private_ip" {
   value = aws_instance.web_server.private_ip
+}
+
+resource "local_file" "ansible_inventory" {
+  filename = "/home/yash/projects/ansible4/inventory.ini"
+
+  content = <<EOT
+[ec2]
+${aws_instance.web_server.public_ip} ansible_user=ubuntu ansible_ssh_private_key_file=/home/yash/Downloads/keys/argocd-key.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+EOT
 }
